@@ -1,0 +1,30 @@
+// TheFinder.java
+// Takes an input and counts instances of "the"
+
+import java.util.Scanner;
+
+public class TheFinder {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		String sentence = "";
+
+		while (!sentence.equalsIgnoreCase("quit")) {
+			System.out.print("Enter a sentence (or quit to exit): ");
+			sentence = (input.nextLine()).toLowerCase();
+			int countsThe = 0; // resets count of "the"s to 0 with each new sentence/loop
+			int index = 0;
+			
+			while ((index = sentence.indexOf("the", index)) > -1) { 
+				countsThe ++;
+				index++;
+			} // sentence.indexOf("the") gives -1 when "the" isn't found
+			  // so loop it to add to countsThe whenever non-negative index IS found
+
+			if (!sentence.equalsIgnoreCase("quit")) {
+				System.out.printf("This sentence contains %d instances of 'the'.%n%n", countsThe);
+			}
+		}
+
+		System.out.println("Programmed by Jocelyn Vazquez");
+	}
+}
