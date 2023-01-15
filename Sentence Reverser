@@ -1,0 +1,45 @@
+// Reverser.java
+// Reverses a sentence the user inputs.
+
+import java.util.Scanner;
+
+public class Reverser {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		String sentence = "";
+		String[] tokenArray;
+		String punctuation ="";
+		int punctuationIndex = -1;
+
+		while (!sentence.equalsIgnoreCase("quit")) { // sentinel is 'quit'
+			System.out.print("Enter a sentence (or quit to exit) ");
+			sentence = input.nextLine();
+
+			// Grab all punctuation at the end
+			for (int firstCounter = sentence.length()-1; firstCounter >=0; firstCounter--){
+				if (!(sentence.charAt(firstCounter) == 33 // '!' in unicode
+					|| sentence.charAt(firstCounter) == 63 // '?' in unicode
+					|| sentence.charAt(firstCounter) == 46)) { // '.' in unicode
+					punctuationIndex = firstCounter+1;
+					break;
+				}
+			}
+
+			// turns all punctuation at end into a string to print last at the end
+			String punctuationString = sentence.substring(punctuationIndex);
+			// and chop that BEFORE splitting string into words
+			sentence = sentence.substring(0, punctuationIndex);
+
+			tokenArray = sentence.split(" ");
+
+			// avoid space after tokenArray[0] by printing that last
+			for (int counter = tokenArray.length-1; counter >=1 ; counter--) {
+				System.out.printf("%s ", tokenArray[counter]);
+			}
+
+			System.out.printf("%s%s%n", tokenArray[0], punctuationString);
+		} 
+
+		System.out.print("Programmed by Jocelyn Vazquez");
+	}
+}
